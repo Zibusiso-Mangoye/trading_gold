@@ -130,3 +130,6 @@ dmypy.json
 
 # sample files used for testing
 data/
+
+# ignore logs
+logs/
