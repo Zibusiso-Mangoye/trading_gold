@@ -23,14 +23,6 @@ def extract_data_from_twelvedata_api():
             }
         return requests.get(url=PARAMS['url'], params=PARAMS).json()
     
-    @task(multiple_outputs=True)
-    def get_tick_data(data: dict) -> dict:
-        return data['values'][0]
-    
-    @task(multiple_outputs=True)
-    def get_meta_data(data: dict) -> dict:
-         return data['meta']
-    
     @task()
     def publish_to_kafka_topic(topic, data) -> None:
         
@@ -44,11 +36,8 @@ def extract_data_from_twelvedata_api():
         producer = KafkaProducer(bootstrap_servers=['localhost:9092'], value_serializer=json_serializer)
         producer.send(topic, data)
     
-    raw_data = get_data_from_twelvedata_api()
-    meta_data = get_meta_data(raw_data)
-    tick_data = get_tick_data(raw_data)
-    publish_to_kafka_topic("tick-data", tick_data)
-    publish_to_kafka_topic("meta-data", meta_data)
+    data = get_data_from_twelvedata_api()
+    publish_to_kafka_topic("data", data)
     
 dag = extract_data_from_twelvedata_api()
     
