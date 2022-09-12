@@ -7,19 +7,24 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - global_net
+      - airflow_default
+
   
   kafka:
     image: wurstmeister/kafka
     container_name: kafka
     ports:
       - "9092:9092"
-    env_file:
-      - .env
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "data:1:1" 
+    volumes:
+     - ./config:/opt/kafka_2.13-2.8.1/config
     networks:
-      - global_net
+      - airflow_default
 
 networks:
-  global_net:
+  airflow_default:
     external: true
     

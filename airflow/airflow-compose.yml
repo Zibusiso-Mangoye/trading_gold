@@ -72,8 +72,8 @@ x-airflow-common:
       condition: service_healthy
     postgres:
       condition: service_healthy
-  networks:
-    - global_net
+  # networks:
+  #   - global_net
 
 services:
   postgres:
@@ -287,8 +287,8 @@ services:
 volumes:
   postgres-db-volume:
 
-networks:
-  global_net:
-      name: global_net
-      driver: bridge
+# networks:
+#   global_net:
+#       name: global_net
+#       driver: bridge
       
