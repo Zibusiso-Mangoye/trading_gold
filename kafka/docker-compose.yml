@@ -6,6 +6,8 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
+    networks:
+      - global_net
   
   kafka:
     image: wurstmeister/kafka
@@ -14,4 +16,10 @@ services:
       - "9092:9092"
     env_file:
       - .env
+    networks:
+      - global_net
+
+networks:
+  global_net:
+    external: true
     
