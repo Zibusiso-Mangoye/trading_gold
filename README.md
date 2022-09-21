@@ -15,7 +15,7 @@ This project aims to aid in the analysis of gold against the US Dollar through t
 
 ## Architecture Overview
 
-![img](img\architecture.jpg)
+![img](img/architecture.jpg)
 
 ## User Instructions
 The timeframe used to trade gold is a matter of personal preference however as stated by [Justforex, 2021](https://justforex.com/education/forex-articles/best-time-to-trade-gold#:~:text=To%20make%20the%20best%20out,trigger%20significant%20gold%20price%20changes.), it is best to trade during times of high volume on intraday timeframes.
