@@ -1,7 +1,7 @@
 import json
 from kafka import KafkaConsumer
 
-consumer = KafkaConsumer("data", bootstrap_servers="localhost:9092")
+consumer = KafkaConsumer("data", bootstrap_servers="kafka:9092")
 for msg in consumer:
     print(json.loads(msg.value))
 
