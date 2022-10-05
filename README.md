@@ -35,7 +35,7 @@ It also shows COT data and sentiment data. More details on how to use these asse
 ### Run the project
 The project has three docker compose files for each service defined above. Therefore to run this project, start by initializing the airflow instance.
 ```
-> docker-compose airflow\airflow-compose.yml airflow-init up -d 
+docker-compose -f airflow/airflow-compose.yml up airflow-init -d 
 ```
 Then run
 ```

@@ -1,10 +1,7 @@
 FROM python:3.10
 
-WORKDIR /usr/src/app
+WORKDIR /usr/dashboard
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-CMD [ "python", "./plot_chart.py" ]
+RUN pip install --user --upgrade pip
+RUN pip install --no-cache-dir --user -r requirements.txt

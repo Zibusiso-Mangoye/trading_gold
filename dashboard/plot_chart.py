@@ -1,9 +1,14 @@
 import json
 from kafka import KafkaConsumer
 
-consumer = KafkaConsumer("data", bootstrap_servers="kafka:9092")
-for msg in consumer:
-    print(json.loads(msg.value))
+def json_deserializer(data):
+            return json.dumps(data).decode("utf-8")
+        
+        
+consumer = KafkaConsumer("data", bootstrap_servers=["localhost:29092"], api_version=(2,0,2), value_deserializer=json_deserializer)
+print(consumer)
+# for msg in consumer:
+#     print(json.loads(msg.value))
 
 
 # # Importing the necessary charting library

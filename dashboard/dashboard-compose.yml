@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  streamlit_dashboard:
+    image: python:3.10
+    container_name: streamlit_dashboard
+    ports:
+      - "49664:49664"
+    networks:
+      - airflow_default
+    volumes:
+      - ./:/usr/dashboard
+    command: pip install --user --upgrade pip && pip install --no-cache-dir --user -r /usr/dashboard/requirements.txt
+
+networks:
+  airflow_default:
+    external: true
