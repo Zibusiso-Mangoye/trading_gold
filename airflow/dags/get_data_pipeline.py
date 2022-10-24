@@ -34,7 +34,7 @@ def extract_data_from_twelvedata_api():
         def json_serializer(data):
             return json.dumps(data).encode("utf-8")
         
-        producer = KafkaProducer(bootstrap_servers=['kafka:9092'], api_version=(2,0,2) ,value_serializer=json_serializer)
+        producer = KafkaProducer(bootstrap_servers=['kafka:9093'], api_version=(2,0,2) ,value_serializer=json_serializer)
         producer.send(topic, data)
     
     data = get_data_from_twelvedata_api()
