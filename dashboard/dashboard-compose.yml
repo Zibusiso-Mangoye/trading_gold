@@ -2,15 +2,14 @@ version: '3'
 
 services:
   streamlit_dashboard:
-    image: streamlit_dashboard:latest_v3
+    image: dashboard:latest
     container_name: streamlit_dashboard
     ports:
-      - "49664:49664"
+      - "8501:8501"
     networks:
       - airflow_default
     volumes:
       - ./:/usr/dashboard
-    command: "python plot_chart.py"
 
 networks:
   airflow_default:
