@@ -7,7 +7,7 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - airflow_default
+      - app_net
 
   
   kafka:
@@ -26,9 +26,9 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CREATE_TOPICS: "data:1:1" 
     networks:
-      - airflow_default
+      - app_net
 
 networks:
-  airflow_default:
+  app_net:
     external: true
     

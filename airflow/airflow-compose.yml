@@ -61,8 +61,6 @@ x-airflow-common:
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
   env_file:
     - .env
-  networks:
-    - app_net
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
@@ -83,8 +81,6 @@ services:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
-    networks:
-      - app_net
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
@@ -98,8 +94,6 @@ services:
     container_name: redis_cache
     expose:
       - 6379
-    networks:
-      - app_net
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -292,4 +286,5 @@ volumes:
   postgres-db-volume:
 
 networks:
-  app_net:
+  default:
+    name: app_net

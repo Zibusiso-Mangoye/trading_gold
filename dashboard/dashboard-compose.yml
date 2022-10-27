@@ -1,16 +1,16 @@
 version: '3'
 
 services:
-  streamlit_dashboard:
-    image: dashboard:latest
-    container_name: streamlit_dashboard
+  streamlit_app:
+    build: .
+    container_name: streamlit_app
     ports:
-      - "8501:8501"
+      - 8501:8501
     networks:
-      - airflow_default
+      - app_net
     volumes:
-      - ./:/usr/dashboard
+      - ./:/app
 
 networks:
-  airflow_default:
+  app_net:
     external: true

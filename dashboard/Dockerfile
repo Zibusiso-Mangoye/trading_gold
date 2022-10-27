@@ -1,6 +1,13 @@
 FROM python:3.10
-WORKDIR /usr/dashboard
-COPY . .
-RUN pip install --user --upgrade pip
-RUN pip install --no-cache-dir --user -r requirements.txt
-CMD [ "python", "plot_chart.py" ]
+
+COPY requirements.txt app/requirements.txt
+
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+
+COPY . /app
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "app.py"]

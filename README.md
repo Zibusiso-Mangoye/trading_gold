@@ -34,6 +34,11 @@ It also shows COT data and sentiment data. More details on how to use these KPIs
   Each service has its own requirements file used in its docker file however for local development and testing a virtual environment is needed and requirements for all services need to be installed on the local environment. More information on how to create a virtual environment [here][venv].
 
 ### Run the project
+Install the requirements to your local environment
+```
+pip install -r requirements.txt
+```
+
 The project has three docker compose files for each service defined above. Therefore to run this project, start by initializing the airflow instance.
 ```
 docker-compose -f airflow/airflow-compose.yml up -d airflow-init 
@@ -42,23 +47,27 @@ Then run
 ```
 docker-compose -f airflow\airflow-compose.yml up -d 
 ```
-To spin up Airflow service. 
+![img](img/airflow_service_view_on_docker_desktop.png)*Expected output viewed on docker desktop - Airflow service*
+
 After airflow service is running start the kafka service by running 
 ```
 docker-compose -f kafka\kafka-compose.yml up -d
 ```
+![img](img/kafka_service_view_on_docker_desktop.png)*Expected output viewed on docker desktop - Kafka service*
+
 Now the dashboard service can also be spun up, 
 ```
 docker-compose -f dashboard\dashboard-compose.yml up -d
 ```
+![img](img/streamlit_service_view_on_docker_desktop.png)*Expected output viewed on docker desktop - Streamlit service*
 
-The following is a result of the above commands
+`To do - display full dashboard here`
+### Next Steps
+Things to improve upon
 
-`TO DO:
-include snippet of docker desktop when all containers are running`
-
-
-
+- Use user instead of root in services
+- Better documentation for each service - each service should have a README.md file that explains how each service was configured. 
+- Optimize each service to project needs - each service must be configured to suit the needs of the project.
 
 [//]: # (Definations)
 
