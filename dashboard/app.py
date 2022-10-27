@@ -1,5 +1,7 @@
 import json
+import pandas as pd
 import streamlit as st
+import plotly.graph_objects as go
 from kafka import KafkaConsumer
 
 st.set_page_config(
@@ -10,15 +12,14 @@ st.set_page_config(
 
 
 def main():
-
+    df = pd.DataFrame(columns=["Timestamp", "Open", "High", "Low", "Close"])
     consumer = KafkaConsumer("data",
                             bootstrap_servers=["kafka:9093"],
                             api_version=(2,0,2)
                             )
-
+    
+    
     for msg in consumer:
-        st.write("I can edit live")
-        st.write(json.loads(msg.value))
         # Sample response 
         # {'meta': 
         #      {'symbol': 'XAU/USD',
@@ -33,7 +34,26 @@ def main():
         #                  'close': '1648.68005'
         #                  }], 
         #   'status': 'ok'}
+        tick_data = json.loads(msg.value)["values"][0]
+        tick = [tick_data['datetime'], tick_data['open'], tick_data['high'], tick_data['low'], tick_data['close']]
+        
+        st.write(tick_data)
+        df.loc[len(df)] = tick
+        
+        st.write(df)
+        # fig = go.Figure(data=[go.Candlestick(x=df['Timestamp'],
+        #                                      open=df['Open'], 
+        #                                      high=df['High'],
+        #                                      low=df['Low'],
+        #                                      close=df['Close']
+        #                                      )
+        #                       ]
+        #                 )
 
+        # fig.update_layout(xaxis_rangeslider_visible=False)
+        # fig.show()
+        
+        
 if __name__ == '__main__':
     main()
 
