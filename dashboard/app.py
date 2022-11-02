@@ -13,13 +13,13 @@ st.set_page_config(
 
 def main():
     df = pd.DataFrame(columns=["Timestamp", "Open", "High", "Low", "Close"])
-    consumer = KafkaConsumer("data",
+    market_data_consumer = KafkaConsumer("data",
                             bootstrap_servers=["kafka:9093"],
                             api_version=(2,0,2)
                             )
+    market_data_consumer.subscribe()
     
-    
-    for msg in consumer:
+    for msg in market_data_consumer:
         # Sample response 
         # {'meta': 
         #      {'symbol': 'XAU/USD',
