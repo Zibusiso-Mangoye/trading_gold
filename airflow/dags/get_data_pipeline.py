@@ -1,4 +1,3 @@
-from sys import api_version
 import pendulum
 from airflow.decorators import dag, task
 
@@ -16,8 +15,8 @@ def extract_data_from_twelvedata_api():
         import requests
 
         PARAMS = {
-            'url': os.getenv('BASE_URL'),
-            'apikey': os.getenv('APIKEY'),
+            'url': os.getenv('BASE_URL_TWELVE_DATA'),
+            'apikey': os.getenv('APIKEY_TWELVE_DATA'),
             'symbol': os.getenv('SYMBOL'),
             'interval': os.getenv('INTERVAL'),
             'outputsize': os.getenv('OUTPUT_SIZE')
@@ -38,7 +37,7 @@ def extract_data_from_twelvedata_api():
         producer.send(topic, data)
     
     data = get_data_from_twelvedata_api()
-    publish_to_kafka_topic("data", data)
+    publish_to_kafka_topic("market_data", data)
     
 dag = extract_data_from_twelvedata_api()
     
