@@ -1,15 +1,9 @@
 import pendulum
 from airflow.decorators import dag, task
 
-@dag(
-    schedule_interval="* * * * *",
-    start_date=pendulum.datetime(2022, 9, 2, tz="UTC"),
-    catchup=False,
-)
-
-def _parse_variable_names(filename: str):
+def _parse_variable_names():
     variable_names = []
-    with open("variable_names.txt") as file:
+    with open("dags/variable_names.txt") as file:
         for line in file:
             if " " not in line[:3]:
                 variable_names.append(line[4:].replace(" ", "_").strip())
@@ -21,7 +15,12 @@ def _parse_variable_names(filename: str):
         variable_names = [i for i in variable_names if i]
         
     return variable_names
-    
+
+@dag(
+    schedule_interval="* * * * *",
+    start_date=pendulum.datetime(2022, 9, 2, tz="UTC"),
+    catchup=False,
+)
 def get_cot_data():
     
     @task()
@@ -42,7 +41,7 @@ def get_cot_data():
         return gold_data
     @task()
     def filter_raw_cot_data(raw_data):
-        variable_names = _parse_variable_names("data/variable_names")        
+        variable_names = _parse_variable_names()        
         raw_data_dict = dict(zip(variable_names, raw_data))
             
         return {

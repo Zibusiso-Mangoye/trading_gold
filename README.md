@@ -69,6 +69,7 @@ Things to improve upon
 - Better documentation for each service - each service should have a README.md file that explains how each service was configured. 
 - Optimize each service to project needs - each service must be configured to suit the needs of the project.
 - Setup configuration for each service using toml files
+- Implement data pesistency in all services
 
 [//]: # (Definations)
 
