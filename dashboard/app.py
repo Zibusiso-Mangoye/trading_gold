@@ -108,7 +108,7 @@ def main():
                         st.markdown("### Second Chart")
                         fig2 = process_cot_data(messages, cot_df)
                         st.write(fig2)
-        sleep(306)
+        # sleep(306)
         
 if __name__ == '__main__':
     main()
